@@ -9,17 +9,17 @@ export default function DayListItem(props) {
   });
 
   // this can be implemented, however I was able to solve this with && conditionals
-  const formatSpots = function (spotsRemaining) {
-    if (spotsRemaining > 1) {
-      return `${spotsRemaining} spots remaining`;
-    }
-    if (spotsRemaining === 1) {
-      return `1 spot remaining`;
-    }
-    if (!spotsRemaining) {
-      return `no spots remaining`;
-    }
-  };
+  // const formatSpots = function (spotsRemaining) {
+  //   if (spotsRemaining > 1) {
+  //     return `${spotsRemaining} spots remaining`;
+  //   }
+  //   if (spotsRemaining === 1) {
+  //     return `1 spot remaining`;
+  //   }
+  //   if (!spotsRemaining) {
+  //     return `no spots remaining`;
+  //   }
+  // };
 
   return (
     <li className={dayClass} onClick={() => props.setDay(props.name)}>
