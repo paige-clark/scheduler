@@ -8,7 +8,7 @@ export default function DayListItem(props) {
     'day-list__item--full': !props.spots,
   });
 
-  // this can be implemented, however I was able to solve this with && conditionals
+  // just saving this in case they wanted this rather than short circuiting
   // const formatSpots = function (spotsRemaining) {
   //   if (spotsRemaining > 1) {
   //     return `${spotsRemaining} spots remaining`;
