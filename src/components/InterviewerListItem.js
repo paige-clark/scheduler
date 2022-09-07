@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import 'components/InterviewerListItem.scss';
 
 export default function InterviewerListItem(props) {
-  console.log(props);
+  // console.log(props);
   // input structure:
   // const interviewer = {
   //   id: 1,

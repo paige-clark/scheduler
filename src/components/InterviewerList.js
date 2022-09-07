@@ -2,8 +2,7 @@ import React from 'react';
 import InterviewerListItem from './InterviewerListItem';
 import 'components/InterviewerList.scss';
 
-export default function InterviewList(props) {
-  console.log(props);
+export default function InterviewerList(props) {
   // iterate through the array of interviews passed in
   const interviewers = props.interviewers.map((interviewer) => {
     return (
