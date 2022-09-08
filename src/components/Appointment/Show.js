@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function Show(props) {
-  console.log(props);
   /*
   The <Show> component should accept the following props:
 
