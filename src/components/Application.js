@@ -3,58 +3,48 @@ import axios from 'axios';
 import 'components/Application.scss';
 import DayList from './DayList';
 import Appointment from './Appointment';
-
-const appointments = {
-  1: {
-    id: 1,
-    time: '12pm',
-  },
-  2: {
-    id: 2,
-    time: '1pm',
-    interview: {
-      student: 'Lydia Miller-Jones',
-      interviewer: {
-        id: 3,
-        name: 'Sylvia Palmer',
-        avatar: 'https://i.imgur.com/LpaY82x.png',
-      },
-    },
-  },
-  3: {
-    id: 3,
-    time: '2pm',
-  },
-  4: {
-    id: 4,
-    time: '3pm',
-    interview: {
-      student: 'Archie Andrews',
-      interviewer: {
-        id: 4,
-        name: 'Cohana Roy',
-        avatar: 'https://i.imgur.com/FK8V841.jpg',
-      },
-    },
-  },
-  5: {
-    id: 5,
-    time: '4pm',
-  },
-};
+import { getAppointmentsForDay } from 'helpers/selectors';
 
 export default function Application(props) {
-  const [selectedDay, setDay] = useState('Monday');
-  const [days, setDays] = useState([]);
+  // how we change state before state refactor
+      // const [selectedDay, setDay] = useState('Monday');
+      // const [days, setDays] = useState([]);
+  const [state, setState] = useState({
+    day: 'Monday',
+    days: [],
+    appointments: {},
+  });
+
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
+
+  const setDay = (day) => {
+    setState({ ...state, day });
+  };
+
+  // how we setDays before Promise.all:
+      // const setDays = (days) => {
+      //   setState((prev) => ({ ...prev, days }));
+      // };
 
   useEffect(() => {
-    axios.get('/api/days').then((response) => {
-      console.log(response.data);
-      setDays([...response.data]);
+    Promise.all([
+      axios.get('http://localhost:8001/api/days'),
+      axios.get('http://localhost:8001/api/appointments'),
+      axios.get('http://localhost:8001/api/interviewers'),
+    ]).then((all) => {
+      setState((prev) => ({
+        ...prev,
+        days: [...all[0].data],
+        appointments: { ...all[1].data },
+      }));
     });
+    // how we made the axios call before the Promise.all:
+        // axios.get('/api/days').then((response) => {
+        //   // setDays([...response.data]);
+        // });
   }, []);
 
-  const schedule = Object.values(appointments).map((appointment) => {
+  const schedule = dailyAppointments.map((appointment) => {
     return <Appointment key={appointment.id} {...appointment} />;
   });
 
@@ -68,7 +58,7 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          <DayList days={days} value={selectedDay} onChange={setDay} />
+          <DayList days={state.days} value={state.day} onChange={setDay} />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"
