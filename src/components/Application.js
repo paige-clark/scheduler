@@ -4,15 +4,17 @@ import 'components/Application.scss';
 import DayList from './DayList';
 import Appointment from './Appointment';
 import { getAppointmentsForDay } from 'helpers/selectors';
+import { getInterview } from 'helpers/getInterview';
 
 export default function Application(props) {
   // how we change state before state refactor
-      // const [selectedDay, setDay] = useState('Monday');
-      // const [days, setDays] = useState([]);
+  // const [selectedDay, setDay] = useState('Monday');
+  // const [days, setDays] = useState([]);
   const [state, setState] = useState({
     day: 'Monday',
     days: [],
     appointments: {},
+    interviewers: {},
   });
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);
@@ -21,10 +23,12 @@ export default function Application(props) {
     setState({ ...state, day });
   };
 
+  // console.log(state.interviewers);
+
   // how we setDays before Promise.all:
-      // const setDays = (days) => {
-      //   setState((prev) => ({ ...prev, days }));
-      // };
+  // const setDays = (days) => {
+  //   setState((prev) => ({ ...prev, days }));
+  // };
 
   useEffect(() => {
     Promise.all([
@@ -36,16 +40,25 @@ export default function Application(props) {
         ...prev,
         days: [...all[0].data],
         appointments: { ...all[1].data },
+        interviewers: { ...all[2].data },
       }));
     });
     // how we made the axios call before the Promise.all:
-        // axios.get('/api/days').then((response) => {
-        //   // setDays([...response.data]);
-        // });
+    // axios.get('/api/days').then((response) => {
+    //   // setDays([...response.data]);
+    // });
   }, []);
 
   const schedule = dailyAppointments.map((appointment) => {
-    return <Appointment key={appointment.id} {...appointment} />;
+    const interview = getInterview(state, appointment.interview);
+    return (
+      <Appointment
+        key={appointment.id}
+        id={appointment.id}
+        time={appointment.time}
+        interview={interview}
+      />
+    );
   });
 
   return (
