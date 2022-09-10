@@ -5,6 +5,7 @@ import DayList from './DayList';
 import Appointment from './Appointment';
 import { getAppointmentsForDay } from 'helpers/selectors';
 import { getInterview } from 'helpers/getInterview';
+import { getInterviewersForDay } from 'helpers/getInterviewersForDay';
 
 export default function Application(props) {
   // how we change state before state refactor
@@ -18,12 +19,14 @@ export default function Application(props) {
   });
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);
+  const dailyInterviewers = getInterviewersForDay(state, state.day);
+  // console.log(dailyInterviewers);
 
   const setDay = (day) => {
     setState({ ...state, day });
   };
 
-  // console.log(state.interviewers);
+  // console.log(state);
 
   // how we setDays before Promise.all:
   // const setDays = (days) => {
@@ -51,12 +54,15 @@ export default function Application(props) {
 
   const schedule = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
+    // const interviewer = getInterviewersForDay(state, appointment.interview);
+    // console.log('INTERVIEWER')
     return (
       <Appointment
         key={appointment.id}
         id={appointment.id}
         time={appointment.time}
         interview={interview}
+        interviewers={dailyInterviewers}
       />
     );
   });
