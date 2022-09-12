@@ -26,8 +26,6 @@ export default function Application(props) {
     setState({ ...state, day });
   };
 
-  // console.log(state);
-
   // how we setDays before Promise.all:
   // const setDays = (days) => {
   //   setState((prev) => ({ ...prev, days }));
@@ -52,6 +50,51 @@ export default function Application(props) {
     // });
   }, []);
 
+  function bookInterview(id, interview) {
+    // console.log(id, interview);
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview },
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+    // console.log(interview);
+    return axios
+      .put(`/api/appointments/${id}`, { interview })
+      .then(() => {
+        console.log('DID IT');
+        setState((prev) => ({
+          ...prev,
+          appointments,
+        }));
+      });
+  }
+
+  function cancelInterview(id) {
+    console.log('Cancelling interview: ' + id);
+    const appointment = {
+      ...state.appointments[id],
+      interview: null,
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+    return axios
+      .delete(`/api/appointments/${id}`, { interview: null })
+      .then(() => {
+        console.log('DID IT');
+        setState((prev) => ({
+          ...prev,
+          appointments,
+        }));
+      });
+  }
+
+  // console.log(state);
+
   const schedule = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
     // const interviewer = getInterviewersForDay(state, appointment.interview);
@@ -63,6 +106,8 @@ export default function Application(props) {
         time={appointment.time}
         interview={interview}
         interviewers={dailyInterviewers}
+        bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />
     );
   });
