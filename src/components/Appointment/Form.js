@@ -7,28 +7,31 @@ export default function Form(props) {
   // console.log(props);
   const [student, setStudent] = useState(props.student || '');
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
+
   const reset = () => {
     setStudent('');
     setInterviewer(null);
   };
+
   const cancel = () => {
     reset();
     props.onCancel();
   };
 
   function validate() {
-    if (student === "") {
-      setError("Student name cannot be blank");
+    if (student === '') {
+      setError('Student name cannot be blank');
       return;
     }
     if (interviewer === null) {
-      setError("Please select an interviewer");
+      setError('Please select an interviewer');
       return;
     }
+    setError('')
     props.onSave(student, interviewer);
   }
- 
+
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
@@ -64,11 +67,11 @@ export default function Form(props) {
   );
 }
 
- // const save = () => {
-  //   return console.log([student, interviewer]);
-  // }
+// const save = () => {
+//   return console.log([student, interviewer]);
+// }
 
-  /*
+/*
   As part of our Edit story, the <Form> component should take
   the following props:
 
