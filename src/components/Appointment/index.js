@@ -22,8 +22,8 @@ export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
-  console.log('MODE:');
-  console.log(mode);
+  // console.log('MODE:');
+  // console.log(mode);
 
   function onSave() {
     transition(SAVING);
