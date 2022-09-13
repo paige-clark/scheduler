@@ -30,18 +30,24 @@ export default function useApplicationData(initial) {
   }, []);
 
   function calculateSpots(id, appointments) {
+    // find the current day's index within the days array
     const dayIndex = state.days.findIndex((day) => state.day === day.name);
+
+    // get the current day from the days array
     const currentDay = state.days[dayIndex];
 
+    // find how many spots are left for a day
     const spots = currentDay.appointments.filter(
       (appointmentId) => !appointments[appointmentId].interview
     ).length;
-
+    
+    // build a new day with the updated spots
     const day = {
       ...state.days[dayIndex],
       spots,
     };
 
+    // update the days array with the new day object
     const days = [...state.days];
     days[dayIndex] = day;
     return days;
@@ -59,12 +65,12 @@ export default function useApplicationData(initial) {
     };
     return axios.put(`/api/appointments/${id}`, { interview }).then(() => {
       console.log('DID IT');
-      let days = calculateSpots(id, appointments);
-      setState((prev) => ({ ...prev, days }));
       setState((prev) => ({
         ...prev,
         appointments,
       }));
+      let days = calculateSpots(id, appointments);
+      setState((prev) => ({ ...prev, days }));
     });
   }
 
@@ -83,12 +89,12 @@ export default function useApplicationData(initial) {
       .delete(`/api/appointments/${id}`, { interview: null })
       .then(() => {
         console.log('DID IT');
-        let days = calculateSpots(id, appointments);
-        setState((prev) => ({ ...prev, days }));
         setState((prev) => ({
           ...prev,
           appointments,
         }));
+        let days = calculateSpots(id, appointments);
+        setState((prev) => ({ ...prev, days }));
       });
   }
 
