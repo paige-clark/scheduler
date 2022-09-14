@@ -64,7 +64,7 @@ export default function useApplicationData(initial) {
       [id]: appointment,
     };
     return axios.put(`/api/appointments/${id}`, { interview }).then(() => {
-      console.log('DID IT');
+      // console.log('DID IT');
       setState((prev) => ({
         ...prev,
         appointments,
@@ -76,7 +76,7 @@ export default function useApplicationData(initial) {
 
   // cancel an interview
   function cancelInterview(id) {
-    console.log('Cancelling interview: ' + id);
+    // console.log('Cancelling interview: ' + id);
     const appointment = {
       ...state.appointments[id],
       interview: null,
@@ -88,7 +88,7 @@ export default function useApplicationData(initial) {
     return axios
       .delete(`/api/appointments/${id}`, { interview: null })
       .then(() => {
-        console.log('DID IT');
+        // console.log('DID IT');
         setState((prev) => ({
           ...prev,
           appointments,

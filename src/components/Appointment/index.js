@@ -37,10 +37,6 @@ export default function Appointment(props) {
     transition(DELETING);
   }
 
-  function onConfirm() {
-    transition(CONFIRM);
-  }
-
   function saveInterview(name, interviewer) {
     const interview = {
       student: name,
@@ -67,10 +63,6 @@ export default function Appointment(props) {
       });
   }
 
-  function confirm() {
-    onConfirm();
-  }
-
   return (
     <article className="appointment" data-testid="appointment">
       <Header time={props.time} />
@@ -79,7 +71,7 @@ export default function Appointment(props) {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
-          onDelete={confirm}
+          onDelete={() => transition(CONFIRM)}
           onEdit={() => transition(CREATE)}
         />
       )}
