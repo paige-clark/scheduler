@@ -5,13 +5,13 @@ import {
   cleanup,
   waitForElement,
   fireEvent,
-  prettyDOM,
+  // prettyDOM,
   getByText,
   getAllByTestId,
   getByAltText,
   getByPlaceholderText,
   queryByText,
-  mockRejected,
+  // mockRejected,
 } from '@testing-library/react';
 import Application from 'components/Application';
 
@@ -48,7 +48,7 @@ describe('Application', () => {
 
   // TEST 03
   it('loads data, books an interview and reduces the spots remaining for Monday by 1', async () => {
-    const { container, debug } = render(<Application />);
+    const { container } = render(<Application />);
     // get info after app loads
     await waitForElement(() => getByText(container, 'Archie Cohen'));
 
