@@ -13,7 +13,9 @@ I learned a lot about React and different testing frameworks during the creation
 - Storybook, Webpack Dev Server, Jest, Testing - Library
 
 ## Screenshots
-Update this with screenshots after uploading them
+![add-appointment](https://github.com/paige-clark/scheduler/blob/master/docs/add-appointment.png?raw=true)
+![updated-spots](https://github.com/paige-clark/scheduler/blob/master/docs/updated-spots.png?raw=true)
+![delete-appointment](https://github.com/paige-clark/scheduler/blob/master/docs/delete-appointment.png?raw=true)
 
 ## Setup
 
