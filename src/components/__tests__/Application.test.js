@@ -25,6 +25,7 @@ describe('Application', () => {
     return waitForElement(() => getByText('Monday'));
   });
 
+  // keeping this as a reminder of how this worked pre async
   //TEST 02:
   // it("defaults to Monday and changes the schedule when a new day is selected", () => {
   //   const { getByText } = render(<Application />);
@@ -74,8 +75,6 @@ describe('Application', () => {
       queryByText(day, 'Monday')
     );
     expect(getByText(day, 'no spots remaining')).toBeInTheDocument();
-    // console.log(prettyDOM(day));
-    // debug();
   });
 
   // TEST 04
@@ -105,7 +104,6 @@ describe('Application', () => {
       queryByText(day, 'Monday')
     );
     expect(getByText(day, '2 spots remaining')).toBeInTheDocument();
-    // console.log(prettyDOM(appointment))
   });
 
   // TEST 05

@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-// import { getAppointmentsForDay } from 'helpers/selectors';
 
 export default function useApplicationData(initial) {
   const [state, setState] = useState({
@@ -14,6 +13,7 @@ export default function useApplicationData(initial) {
     setState({ ...state, day });
   };
 
+  // get all the info from the api
   useEffect(() => {
     Promise.all([
       axios.get('/api/days'),
@@ -40,7 +40,7 @@ export default function useApplicationData(initial) {
     const spots = currentDay.appointments.filter(
       (appointmentId) => !appointments[appointmentId].interview
     ).length;
-    
+
     // build a new day with the updated spots
     const day = {
       ...state.days[dayIndex],
@@ -64,7 +64,6 @@ export default function useApplicationData(initial) {
       [id]: appointment,
     };
     return axios.put(`/api/appointments/${id}`, { interview }).then(() => {
-      // console.log('DID IT');
       setState((prev) => ({
         ...prev,
         appointments,
@@ -76,7 +75,6 @@ export default function useApplicationData(initial) {
 
   // cancel an interview
   function cancelInterview(id) {
-    // console.log('Cancelling interview: ' + id);
     const appointment = {
       ...state.appointments[id],
       interview: null,
@@ -88,7 +86,6 @@ export default function useApplicationData(initial) {
     return axios
       .delete(`/api/appointments/${id}`, { interview: null })
       .then(() => {
-        // console.log('DID IT');
         setState((prev) => ({
           ...prev,
           appointments,
@@ -102,6 +99,8 @@ export default function useApplicationData(initial) {
 }
 
 /*
+DATA STRUCTURE:
+
 days:
 [
 {
@@ -111,7 +110,6 @@ days:
 "interviewers": [1,2,5,6,10],
 "spots": 3
 },
-
 
 interviewers:
 {

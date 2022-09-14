@@ -4,7 +4,6 @@ import InterviewerList from 'components/InterviewerList';
 import React, { useState } from 'react';
 
 export default function Form(props) {
-  // console.log(props);
   const [student, setStudent] = useState(props.student || '');
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState('');
@@ -19,6 +18,7 @@ export default function Form(props) {
     props.onCancel();
   };
 
+  // prevents user from submitting a booking with no name or no interviewer
   function validate() {
     if (student === '') {
       setError('Student name cannot be blank');
@@ -66,25 +66,3 @@ export default function Form(props) {
     </main>
   );
 }
-
-// const save = () => {
-//   return console.log([student, interviewer]);
-// }
-
-/*
-  As part of our Edit story, the <Form> component should take
-  the following props:
-
-  student:String
-  interviewer:Number
-  interviewers:Array
-  onSave:Function
-  onCancel:Function
-
-  As part of our Create story, the <Form> component should take
-  the following props:
-
-  interviewers:Array
-  onSave:Function
-  onCancel:Function
-  */

@@ -1,5 +1,4 @@
 export function getInterviewersForDay(state, day) {
-  // console.log(state.days);
   if (!state.days.length) {
     return [];
   }

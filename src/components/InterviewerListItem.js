@@ -3,15 +3,6 @@ import classNames from 'classnames';
 import 'components/InterviewerListItem.scss';
 
 export default function InterviewerListItem(props) {
-  // console.log(props);
-  // input structure:
-  // const interviewer = {
-  //   id: 1,
-  //   name: "Sylvia Palmer",
-  //   avatar: "https://i.imgur.com/LpaY82x.png"
-  //   selected: boolean
-  //   setInterviewer: function
-  // };
   const interviewClass = classNames('interviewers__item', {
     'interviewers__item--selected': props.selected,
   });

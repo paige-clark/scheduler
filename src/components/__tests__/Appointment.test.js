@@ -12,23 +12,15 @@ import { render } from "@testing-library/react";
 /*
   We import the component that we are testing
 */
-import Application from "components/Application";
 import Appointment from "components/Appointment/index"
 
 /*
   A test that renders a React Component
 */
 
+// this served as an example test file
 describe("Appointment", () => {
-  // it("renders without crashing", () => {
-  //   render(<Appointment />);
-  // });
-
-  xit("does something it is supposed to do", () => {
-    // ...
-  });
-
-  xit("does something else it is supposed to do", () => {
-    // ...
+  it("renders without crashing", () => {
+    render(<Appointment />);
   });
 });

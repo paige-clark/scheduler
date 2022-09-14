@@ -3,9 +3,9 @@ export function getInterview(state, interview) {
     return null;
   }
   const returnObj = {};
-  if(interview.interviewer) {
-    returnObj["student"] = interview.student;
-    returnObj["interviewer"] = {...state.interviewers[interview.interviewer]};
+  if (interview.interviewer) {
+    returnObj['student'] = interview.student;
+    returnObj['interviewer'] = { ...state.interviewers[interview.interviewer] };
   }
   return returnObj;
 }

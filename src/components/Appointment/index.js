@@ -22,37 +22,25 @@ export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
-  // console.log('MODE:');
-  // console.log(mode);
-
-  function onSave() {
-    transition(SAVING);
-  }
-
-  function onComplete() {
-    transition(SHOW);
-  }
-
-  function onDelete() {
-    transition(DELETING);
-  }
 
   function saveInterview(name, interviewer) {
     const interview = {
       student: name,
       interviewer,
     };
-    onSave();
-    props.bookInterview(props.id, interview).then(() => {
-      onComplete();
-    })
-    .catch((err) => {
-      transition(ERROR_SAVE, true);
-    });
+    transition(SAVING);
+    props
+      .bookInterview(props.id, interview)
+      .then(() => {
+        transition(SHOW);
+      })
+      .catch((err) => {
+        transition(ERROR_SAVE, true);
+      });
   }
 
   function cancelInterview(id) {
-    onDelete();
+    transition(DELETING);
     props
       .cancelInterview(id)
       .then(() => {
@@ -93,8 +81,12 @@ export default function Appointment(props) {
       )}
       {mode === SAVING && <Status message="Saving..." />}
       {mode === DELETING && <Status message="Deleting..." />}
-      {mode === ERROR_SAVE && <Error onClose={back} message="Could not save changes." />}
-      {mode === ERROR_DELETE && <Error onClose={back} message="Could not cancel appointment." />}
+      {mode === ERROR_SAVE && (
+        <Error onClose={back} message="Could not save changes." />
+      )}
+      {mode === ERROR_DELETE && (
+        <Error onClose={back} message="Could not cancel appointment." />
+      )}
     </article>
   );
 }

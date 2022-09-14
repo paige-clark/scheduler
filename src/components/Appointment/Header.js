@@ -1,5 +1,6 @@
 import React from 'react';
 
+// component that renders the time for each appointment
 export default function Header(props) {
   return (
     <header className="appointment__time">
