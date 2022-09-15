@@ -7,8 +7,6 @@ I learned a lot about React and different testing frameworks during the creation
 
 ## Tools Used
 - React
-- Webpack, Babel
-- Axios, WebSockets
 - Axios
 - Storybook, Webpack Dev Server, Jest, Testing - Library
 
