@@ -4,6 +4,7 @@ describe('Appointments', () => {
     cy.visit('/');
     cy.contains('Monday');
   });
+
   // TEST 1
   it('should book an interview', () => {
     // clicks on the "Add" button in the second appointment
@@ -18,6 +19,7 @@ describe('Appointments', () => {
     cy.contains('.appointment__card--show', 'Lydia Miller-Jones');
     cy.contains('.appointment__card--show', 'Sylvia Palmer');
   });
+  
   // TEST 2
   it('should edit an interview', () => {
     // clicks the edit button for the existing appointment
