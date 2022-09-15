@@ -13,8 +13,11 @@ I learned a lot about React and different testing frameworks during the creation
 - Storybook, Webpack Dev Server, Jest, Testing - Library
 
 ## Screenshots
+Create an appointment by entering a name and selecting an interviewer:
 ![add-appointment](https://github.com/paige-clark/scheduler/blob/master/docs/add-appointment.png?raw=true)
-![updated-spots](https://github.com/paige-clark/scheduler/blob/master/docs/updated-spots.png?raw=true)
+Each interview can be edited or deleted, note the change to the spots on the left bar when we created a new appointment:
+![updated-spots](https://github.com/paige-clark/scheduler/blob/master/docs/updated-spots-V2.png?raw=true)
+When a user chooses to delete an appointment they are prompted with a confirmation message:
 ![delete-appointment](https://github.com/paige-clark/scheduler/blob/master/docs/delete-appointment.png?raw=true)
 
 ## Setup
